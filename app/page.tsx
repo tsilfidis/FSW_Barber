@@ -47,7 +47,6 @@ const Home = async () => {
               {option.title}
             </Button>
           ))}
-          ;
         </div>
 
         {/* IMAGEM */}
