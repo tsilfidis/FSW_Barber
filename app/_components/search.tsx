@@ -5,6 +5,7 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
@@ -15,7 +16,7 @@ const formSchema = z.object({
   }),
 })
 
-const Serach = () => {
+const Search = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,6 +28,7 @@ const Serach = () => {
   const handleSubmit = (data: z.infer<typeof formSchema>) => {
     router.push(`/barbershops?title=${data.title}`)
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="flex gap-2">
@@ -36,7 +38,11 @@ const Serach = () => {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormControl>
-                <Input placeholder="Faça sua busca..." {...field} />
+                <Input
+                  placeholder="Faça sua busca..."
+                  {...field}
+                  className="w-full"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -50,4 +56,4 @@ const Serach = () => {
   )
 }
 
-export default Serach
+export default Search
