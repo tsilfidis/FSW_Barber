@@ -111,10 +111,12 @@ const Home = async () => {
                 />
               ))
             ) : (
-              <p className="text-sm">Você não tem agendamentos confirmados!</p>
+              <p className="text-sm text-gray-400">
+                Você não tem agendamentos!
+              </p>
             )
           ) : (
-            <p className="text-sm">
+            <p className="text-sm text-gray-400">
               Faça login para mostrar seus agendamentos.
             </p>
           )}
