@@ -105,7 +105,10 @@ const Home = async () => {
           {session ? (
             confirmedBookings.length > 0 ? (
               confirmedBookings.map((booking) => (
-                <BookingItem key={booking.id} booking={booking} />
+                <BookingItem
+                  key={booking.id}
+                  booking={JSON.parse(JSON.stringify(booking))}
+                />
               ))
             ) : (
               <p className="text-sm">Você não tem agendamentos confirmados!</p>
