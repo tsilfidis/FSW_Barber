@@ -47,11 +47,17 @@ const Home = async () => {
       <Header />
       <div className="p-5">
         {/* TEXTO */}
-        <h2 className="text-xl font-bold">Olá, {session?.user?.name}!</h2>
+        <h2 className="text-xl font-bold">
+          Olá, {session?.user ? session.user.name : "Bem vindo"}!
+        </h2>
         <p>
-          {format(new Date(), "cccc", { locale: ptBR })},{" "}
-          {format(new Date(), "d", { locale: ptBR })} de{" "}
-          {format(new Date(), "MMMM", { locale: ptBR })}
+          <span className="capitalize">
+            {format(new Date(), "EEEE, d", { locale: ptBR })}
+          </span>
+          <span> de </span>
+          <span className="capitalize">
+            {format(new Date(), "MMMM.", { locale: ptBR })}
+          </span>
         </p>
 
         {/* BUSCA */}
@@ -95,11 +101,20 @@ const Home = async () => {
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
           Agendamentos
         </h2>
-
         <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {confirmedBookings.map((booking) => (
-            <BookingItem key={booking.id} booking={booking} />
-          ))}
+          {session ? (
+            confirmedBookings.length > 0 ? (
+              confirmedBookings.map((booking) => (
+                <BookingItem key={booking.id} booking={booking} />
+              ))
+            ) : (
+              <p className="text-sm">Você não tem agendamentos confirmados!</p>
+            )
+          ) : (
+            <p className="text-sm">
+              Faça login para mostrar seus agendamentos.
+            </p>
+          )}
         </div>
 
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
