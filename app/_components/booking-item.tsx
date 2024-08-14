@@ -32,6 +32,7 @@ import { deleteBooking } from "../_actions/delete-booking"
 import { toast } from "sonner"
 import { useState } from "react"
 import BookingSummary from "./booking-summary"
+import { useRouter } from "next/navigation"
 
 interface BookingItemProps {
   booking: Prisma.BookingGetPayload<{
@@ -47,6 +48,7 @@ interface BookingItemProps {
 
 // TODO: receber agendamento como prop
 const BookingItem = ({ booking }: BookingItemProps) => {
+  const router = useRouter()
   const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   const {
@@ -57,7 +59,12 @@ const BookingItem = ({ booking }: BookingItemProps) => {
     try {
       await deleteBooking(booking.id)
       setIsSheetOpen(false)
-      toast.success("Reserva cancelada com sucesso!")
+      toast.success("Reserva cancelada com sucesso!", {
+        action: {
+          label: "Voltar ao início",
+          onClick: () => router.push("/"),
+        },
+      })
     } catch (error) {
       console.error(error)
       toast.error("Erro ao cancelar reserva! Tente novamente")
