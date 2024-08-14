@@ -202,13 +202,12 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                 </Button>
 
                 <SheetContent className="w-[80%] px-0">
-                  <SheetHeader>
+                  <SheetHeader className="items-center">
                     <SheetTitle>Fazer Reserva</SheetTitle>
                   </SheetHeader>
 
-                  <div className="border-b border-solid py-5">
+                  <div className="min-w-full border-b border-solid py-5">
                     <Calendar
-                      className="w-full"
                       mode="single"
                       locale={ptBR}
                       selected={selectedDay}
